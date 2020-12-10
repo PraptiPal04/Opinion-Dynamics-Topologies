@@ -90,27 +90,26 @@ x0=(np.random.uniform(size=N)-0.5)*2    #initial state
 #     A[N-1,0]=1
 #     A[0,N-1]=1
 
-#Wheel
-for i in range(N-2):
-    A[i,i+1]=1
-    A[i+1,i]=1
-    A[i,N-1]=1
-    A[N-1,i]=1
-A[N-2,N-1]=1
-A[N-1,N-2]=1
-A[N-2,0]=1
-A[0,N-2]=1
+# #Wheel
+# for i in range(N-2):
+#     A[i,i+1]=1
+#     A[i+1,i]=1
+#     A[i,N-1]=1
+#     A[N-1,i]=1
+# A[N-2,N-1]=1
+# A[N-1,N-2]=1
+# A[N-2,0]=1
+# A[0,N-2]=1
 
 # #Path
 # for i in range(N-1):
 #     A[i,i+1]=1
 #     A[i+1,i]=1
 
-# #Star
-# for i in range(N-2):
-#     A[i,N-1]=1
-#     A[N-1,i]=1
-
+#Star
+for i in range(N-1):
+    A[i,N-1]=1
+    A[N-1,i]=1
 
 
 rows,cols=np.where(A==1.)
@@ -128,7 +127,7 @@ sm.set_array([])
 
 #Plotting
 
-x=rk4(rhs,x0,15.0,0.05,N,A,d=1.0,u=0.26,al=1.2,gm=-1.3,b=0.0)
+x=rk4(rhs,x0,15.0,0.05,N,A,d=1.0,u=0.26,al=1.2,gm=1.3,b=0.0)
 # t=np.arange(0.,15.05,0.05)
 # for i in range(N):
 #     plt.plot(t,x[i,:])
@@ -162,6 +161,5 @@ def animate(i):
 plt.colorbar(sm)
 anim = an.FuncAnimation(fig, animate, frames=200, blit=False)
 writervideo = an.FFMpegWriter(fps=10) 
-anim.save('WHeel Topology Disagreement.mp4', writer=writervideo)
-
+anim.save('Star Topology Agreement.mp4', writer=writervideo)
 
